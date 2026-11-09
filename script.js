@@ -9,7 +9,7 @@ const projectList = [
   {
     name: "The fish spot",
     imageSrc: "images/fishSpot.jpg",
-    description: "A modern restaurant website for The Fish Spot.",
+    description: "A modern resturant website for The Fish Spot.",
     appType: "Website",
   },
   {
@@ -21,7 +21,6 @@ const projectList = [
     appType: "Web App",
   },
 ];
-
 const tools = [
   {
     name: "HTML5",
@@ -43,14 +42,33 @@ const tools = [
     name: "Blender",
     logo: "images/blender.jpg",
   },
+  {
+    name: "HTML5",
+    logo: "images/html.jpg",
+  },
+  {
+    name: "CSS3",
+    logo: "images/css.jpg",
+  },
+  {
+    name: "Git",
+    logo: "images/git.svg",
+  },
+  {
+    name: "JavaScript",
+    logo: "images/js.jpg",
+  },
+  {
+    name: "Blender",
+    logo: "images/blender.jpg",
+  },
 ];
-
 const wds = [
   {
     logo: "images/wds/web.svg",
-    title: "Web Development",
+    title: "Frontend Development",
     description:
-      "Modern, responsive and scalable web applications.",
+      "Building clean, responsive, and pixel-perfect web pages using modern HTML and CSS.",
   },
   {
     logo: "images/wds/js.svg",
@@ -62,16 +80,15 @@ const wds = [
     logo: "images/wds/3d.svg",
     title: "3D Modeling & Assets",
     description:
-      "Crafting custom 3D models, low-poly assets, and visual elements for digital projects using Blender.",
+      "Building clean, responsive, and pixel-perfect web pages using modern HTML and CSS.",
   },
   {
     logo: "images/wds/design.svg",
-    title: "UI/UX Development",
+    title: "Frontend Development",
     description:
-      "Beautiful, intuitive and user-centered designs.",
+      "Crafting custom 3D models, low-poly assets, and visual elements for digital projects using Blender.",
   },
 ];
-
 function createProjects() {
   projectList.forEach((project) => {
     let projectCard = document.createElement("div");
@@ -81,48 +98,46 @@ function createProjects() {
             <h3>${project.name}</h3>
             <p>${project.description}</p>
             <div class="btm">
-              <span>${project.appType}</span>
-              <div class="icon_btm">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M5 12h14"></path>
-                  <path d="m12 5 7 7-7 7"></path>
-                </svg>
-              </div>
+            <span>${project.appType}</span>
+<div class="icon_btm">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M5 12h14"></path>
+  <path d="m12 5 7 7-7 7"></path>
+</svg>
+</div>
             </div>
     `;
     myProjects.appendChild(projectCard);
   });
 }
-
 function createTool() {
-  let mainTool = document.querySelector(".tools");
-  tools.forEach((tool) => {
+  tools.forEach((project) => {
+    let mainTool = document.querySelector(".tools");
     const toolCard = document.createElement("div");
     toolCard.classList.add("toolCard");
     toolCard.innerHTML = `
-            <img src="${tool.logo}" alt="${tool.name}">
-            <p>${tool.name}</p>
+            <img src="${project.logo}" alt="${project.name}">
+            <p>${project.name}</p>
     `;
     mainTool.appendChild(toolCard);
   });
 }
-
 function createWds() {
-  let mainWds = document.querySelector(".wdss");
-  wds.forEach((item) => {
+  wds.forEach((project) => {
+    let mainTool = document.querySelector(".wdss");
     const wdsCard = document.createElement("div");
     wdsCard.classList.add("wdsCard");
     wdsCard.innerHTML = `
-            <img src="${item.logo}" alt="${item.title}">
+            <img src="${project.logo}" alt="${project.title}">
             <div class="wtxt">
-              <h2>${item.title}</h2>
-              <p>${item.description}</p>
+              <h2>${project.title}</h2>
+              <p>${project.description}</p>
             </div>
     `;
-    mainWds.appendChild(wdsCard);
+    mainTool.appendChild(wdsCard);
   });
 }
-
-createWds();
+createWds()
 createTool();
 createProjects();
