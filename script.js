@@ -1,4 +1,9 @@
 const myProjects = document.querySelector(".myProjects");
+const mainNav = document.querySelector(".main_nav");
+const menuBtn = document.querySelector(".menu_btn");
+const talkBtn = document.querySelector(".talk_btn");
+const navLinks = document.querySelectorAll(".links a");
+
 const projectList = [
   {
     name: "Cipher",
@@ -77,7 +82,7 @@ function createProjects() {
     let projectCard = document.createElement("div");
     projectCard.classList.add("pCard");
     projectCard.innerHTML = `
-            <img src="${project.imageSrc}" alt="${project.name}">
+            <img src="${project.imageSrc}" alt="${project.name}" loading="lazy">
             <h3>${project.name}</h3>
             <p>${project.description}</p>
             <div class="btm">
@@ -100,7 +105,7 @@ function createTool() {
     const toolCard = document.createElement("div");
     toolCard.classList.add("toolCard");
     toolCard.innerHTML = `
-            <img src="${tool.logo}" alt="${tool.name}">
+            <img src="${tool.logo}" alt="${tool.name}" loading="lazy">
             <p>${tool.name}</p>
     `;
     mainTool.appendChild(toolCard);
@@ -113,7 +118,7 @@ function createWds() {
     const wdsCard = document.createElement("div");
     wdsCard.classList.add("wdsCard");
     wdsCard.innerHTML = `
-            <img src="${item.logo}" alt="${item.title}">
+            <img src="${item.logo}" alt="${item.title}" loading="lazy">
             <div class="wtxt">
               <h2>${item.title}</h2>
               <p>${item.description}</p>
@@ -123,6 +128,49 @@ function createWds() {
   });
 }
 
+function toggleMenu() {
+  const isOpen = mainNav.classList.toggle("open");
+  menuBtn.setAttribute("aria-expanded", isOpen);
+  menuBtn.querySelector("i").className = isOpen
+    ? "fa-solid fa-xmark"
+    : "fa-solid fa-bars";
+}
+
+function closeMenu() {
+  mainNav.classList.remove("open");
+  menuBtn.setAttribute("aria-expanded", false);
+  menuBtn.querySelector("i").className = "fa-solid fa-bars";
+}
+
+function goToContact() {
+  document.querySelector("#contact").scrollIntoView();
+  closeMenu();
+}
+
+function markActiveLink() {
+  const sections = document.querySelectorAll("[data-section]");
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        navLinks.forEach((link) => {
+          link.classList.toggle(
+            "active",
+            link.getAttribute("href") === `#${entry.target.id}`
+          );
+        });
+      });
+    },
+    { rootMargin: "-45% 0px -50% 0px" }
+  );
+  sections.forEach((section) => observer.observe(section));
+}
+
+menuBtn.addEventListener("click", toggleMenu);
+talkBtn.addEventListener("click", goToContact);
+navLinks.forEach((link) => link.addEventListener("click", closeMenu));
+
 createWds();
 createTool();
 createProjects();
+markActiveLink();
